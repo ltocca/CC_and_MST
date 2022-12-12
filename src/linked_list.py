@@ -15,6 +15,7 @@ class Node:
     def set_next(self, new_next):
         self.next = new_next
 
+
 class LinkedList:
     def __init__(self):
         self.head = None

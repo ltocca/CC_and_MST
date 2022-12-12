@@ -1,3 +1,5 @@
+import random
+
 import numpy as np
 
 BLACK = 'BLACK'
@@ -18,13 +20,23 @@ class Vertex:  # o la chiamo nodo?
 
 
 class Graph:
-    def __init__(self, n_vertices):
+    def __init__(self, n_vertices, probability):
         self.v = []  # vettore contenente i vertici/nodi
         for j in n_vertices:
             self.v.append(Vertex(j))
-        adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
+        self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
 
     def add_vertex(self, value):
         if value in self.v:
             return print("Vertex already present")
         self.v.append(Vertex(value))
+
+    def populate_adj(self, prob, weight):
+        for i in range(self.adj.size):
+            for j in range(self.adj.size):
+                v = 1
+                if (random.random() + (prob/100)) > 1 and weight:
+                    v = random.random() * 100
+                self.adj[i, j] = v
+
+    # def dfs(self, ):
