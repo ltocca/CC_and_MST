@@ -1,12 +1,11 @@
 import numpy as np
 
-
 BLACK = 'BLACK'
 GREY = 'GREY'
 WHITE = 'WHITE'
 
 
-class Vertex: # o la chiamo nodo?
+class Vertex:  # o la chiamo nodo?
     def __init__(self, v):
         self.value = v
         self.colour = WHITE  # al momento della creazione il vertice non è ancora stato scorperto -> bianco
@@ -20,7 +19,12 @@ class Vertex: # o la chiamo nodo?
 
 class Graph:
     def __init__(self, n_vertices):
-        v = []  # vettore contenente i vertici/nodi
+        self.v = []  # vettore contenente i vertici/nodi
         for j in n_vertices:
-            v.append(Vertex(j))
+            self.v.append(Vertex(j))
         adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
+
+    def add_vertex(self, value):
+        if value in self.v:
+            return print("Vertex already present")
+        self.v.append(Vertex(value))
