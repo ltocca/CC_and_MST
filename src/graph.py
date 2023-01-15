@@ -22,6 +22,7 @@ class Vertex:  # o la chiamo nodo?
 class Graph:
     def __init__(self, n_vertices, probability):
         self.v = []  # vettore contenente i vertici/nodi
+        self.t = 0
         for j in n_vertices:
             self.v.append(Vertex(j))
         self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
@@ -39,4 +40,32 @@ class Graph:
                     v = random.random() * 100
                 self.adj[i, j] = v
 
-    # def dfs(self, ):
+    def dfs(self):
+        for u in self.v:
+            u.colour = WHITE
+            u.p = None
+        self.t = 0
+        for u in self.v:
+            if u.colour is WHITE:
+                self.dfs_visit(u)
+
+    def dfs_visit(self, u):
+        self.t += 1
+        u.d = self.t
+        u.colour = GREY
+        for v in self.adj[u]:
+            if v.colour is WHITE:
+                v.p = u
+                self.dfs_visit(v)
+        u.colour = BLACK
+        self.t += 1
+        u.f = self.t
+
+    def transpose(self):
+        t = self
+        t.adj.transpose()
+        return t
+
+    def scc(self):
+        self.dfs()
+        gt = self.transpose()
