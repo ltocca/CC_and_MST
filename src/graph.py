@@ -26,6 +26,7 @@ class Graph:
         for j in n_vertices:
             self.v.append(Vertex(j))
         self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
+        self.edges = []  # inizializzazione vettore di archi
 
     def add_vertex(self, value):
         if value in self.v:
@@ -39,6 +40,7 @@ class Graph:
                 if (random.random() + (prob/100)) > 1 and weight:
                     v = random.random() * 100
                 self.adj[i, j] = v
+                self.edges.append([i, j, v])
 
     def dfs(self):
         for u in self.v:
