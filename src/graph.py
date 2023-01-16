@@ -36,11 +36,11 @@ class Graph:
     def populate_adj(self, prob, weight):
         for i in range(self.adj.size):
             for j in range(self.adj.size):
-                v = 1
+                v = 0
                 if (random.random() + (prob / 100)) > 1 and weight:
                     v = random.random() * 100
                 self.adj[i, j] = v
-                self.edges.append([i, j, v])
+                #self.edges.append([i, j, v])
 
     def dfs(self, sort = False):
         for u in self.v:
@@ -75,3 +75,9 @@ class Graph:
     def scc(self):
         self.dfs()
         gt = self.transpose()
+        gt.dfs(True)
+
+        scc_found = set()
+        scc_queue = []
+        for v in gt.v:
+
