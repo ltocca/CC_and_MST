@@ -37,16 +37,20 @@ class Graph:
         for i in range(self.adj.size):
             for j in range(self.adj.size):
                 v = 1
-                if (random.random() + (prob/100)) > 1 and weight:
+                if (random.random() + (prob / 100)) > 1 and weight:
                     v = random.random() * 100
                 self.adj[i, j] = v
                 self.edges.append([i, j, v])
 
-    def dfs(self):
+    def dfs(self, sort = False):
         for u in self.v:
             u.set_colour(WHITE)
             u.p = None
         self.t = 0
+        if sort:
+            #tmp = self.v
+            #tmp.sort(key=lambda tmp: tmp.f, reverse = True)
+            self.v.sort (key = lambda v: v.f, reverse = True)
         for u in self.v:
             if u.colour is WHITE:
                 self.dfs_visit(u)
