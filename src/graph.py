@@ -45,15 +45,11 @@ class Graph:
                 self.adj[i, j] = v
                 #self.edges.append([i, j, v])
 
-    def dfs(self, sort = False):
+    def dfs(self):
         for u in self.v:
             u.set_colour(WHITE)
             u.p = None
         self.t = 0
-        if sort:
-            #tmp = self.v
-            #tmp.sort(key=lambda tmp: tmp.f, reverse = True)
-            self.v.sort (key = lambda v: v.f, reverse = True)
         for u in self.v:
             if u.colour is WHITE:
                 self.dfs_visit(u)
@@ -69,18 +65,4 @@ class Graph:
         u.set_colour(BLACK)
         self.t += 1
         u.f = self.t
-
-    def transpose(self):
-        t = self
-        t.adj.transpose()
-        return t
-
-    def scc(self):
-        self.dfs()
-        gt = self.transpose()
-        gt.dfs(True)
-
-        scc_found = set()
-        scc_queue = []
-        # for v in gt.v:
 
