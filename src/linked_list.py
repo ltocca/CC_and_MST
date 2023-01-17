@@ -32,6 +32,9 @@ class LinkedList:
     def set_head(self, h):
         self.head = h
 
+    def get_head(self):
+        return self.head
+
     def set_tail (self, t):
         self.tail = t
 
@@ -50,6 +53,18 @@ class LinkedList:
         else:
             temp.set_next(self.head)
             self.set_head(temp)
+
+    def search(self, v):
+        if self.is_empty() is not True:
+            n = self.head
+            while n.get_next() is not None:
+                if n.get_data is v:
+                    print("Node found!")
+                    return n
+                else:
+                    n = n.get_next()
+            print("Node not found!")
+            return None
 
     def size(self):
         current = self.head
