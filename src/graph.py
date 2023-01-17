@@ -33,12 +33,15 @@ class Graph:
             return print("Vertex already present")
         self.v.append(Vertex(value))
 
-    def populate_adj(self, prob, weight):
+    def populate_adj(self, prob, weight=False):
         for i in range(self.adj.size):
             for j in range(self.adj.size):
                 v = 0
-                if (random.random() + (prob / 100)) > 1 and weight:
+                p = (random.random() + (prob / 100))
+                if p > 1 and weight:
                     v = random.random() * 100
+                elif p > 1:
+                    v = 1
                 self.adj[i, j] = v
                 #self.edges.append([i, j, v])
 
@@ -79,5 +82,5 @@ class Graph:
 
         scc_found = set()
         scc_queue = []
-        for v in gt.v:
+        # for v in gt.v:
 
