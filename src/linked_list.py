@@ -1,8 +1,10 @@
 class Node:
     def __init__(self, init_data):
         self.data = init_data
-        self.next = None
+        self.r = None  # rappresentante
+        self.next = None  # successore
 
+    # getters e setters non sono pythonic (forse sostituire con proprietà)
     def get_data(self):
         return self.data
 
@@ -15,18 +17,39 @@ class Node:
     def set_next(self, new_next):
         self.next = new_next
 
+    def get_r(self):
+        return self.r
+
+    def set_r(self, r):
+        self.r = r
+
 
 class LinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
+
+    def set_head(self, h):
+        self.head = h
+
+    def set_tail (self, t):
+        self.tail = t
+
+    def get_tail(self):
+        return self.tail
 
     def is_empty(self):
         return self.head is None
 
-    def add(self, item):
+    def add(self, item):  # inserimento in testa
         temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
+        if self.is_empty():
+            self.set_head(temp)
+            self.set_tail(temp)
+            temp.set_r(self)
+        else:
+            temp.set_next(self.head)
+            self.set_head(temp)
 
     def size(self):
         current = self.head
@@ -35,3 +58,7 @@ class LinkedList:
             count = count + 1
             current = current.get_next()
         return count
+
+    def clear(self):
+        self.head = None
+        self.tail = None
