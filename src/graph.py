@@ -28,6 +28,9 @@ class Graph:
         self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
         self.edges = []  # inizializzazione vettore di archi
 
+    def size(self):
+        return self.adj.size
+
     def add_vertex(self, value):
         if value in self.v:
             return print("Vertex already present")
