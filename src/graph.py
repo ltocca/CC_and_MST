@@ -36,6 +36,9 @@ class Graph:
             return print("Vertex already present")
         self.v.append(Vertex(value))
 
+    def get_edges(self, i, j):
+        return self.edges
+
     def populate_adj(self, prob, weight=False):
         for i in range(self.adj.size):
             for j in range(self.adj.size):
@@ -45,8 +48,9 @@ class Graph:
                     v = random.random() * 100
                 elif p > 1:
                     v = 1
-                self.adj[i, j] = v
-                #self.edges.append([i, j, v])
+                if v is not 0:
+                    self.adj[i, j] = v
+                    self.edges.append([i, j, v])
 
     def dfs(self):
         for u in self.v:
