@@ -66,6 +66,15 @@ class LinkedList:
             print("Node not found!")
             return None
 
+    def merge(self, ll):
+        h = self.get_head()
+        c = ll.get_head()
+        self.tail.set_next(c)
+        self.set_tail(ll.get_tail())
+        while c.is_empty() is not True:
+            c.r = h
+            c = c.get_next()
+
     def size(self):
         current = self.head
         count = 0
@@ -77,3 +86,5 @@ class LinkedList:
     def clear(self):
         self.head = None
         self.tail = None
+
+
