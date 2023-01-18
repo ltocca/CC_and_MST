@@ -22,13 +22,15 @@ class UnionFind:
         return None
 
     def union(self, x, y):
+        s = LinkedList()
         s_x = self.find_ll(x)
         s_y = self.find_ll(y)
         if s_x.size() < s_y.size():  # euristica unione pesata
-            s_y.merge(s_x)
-            self.collection.remove(s_x)
+            s = s_y.merge(s_x)
         else:
-            s_x.merge(s_y)
-            self.collection.remove(s_y)
+            s = s_x.merge(s_y)
+        self.collection.append(s)
+        self.collection.remove(s_x)
+        self.collection.remove(s_y)
 
 
