@@ -39,6 +39,10 @@ class Graph:
     def get_edges(self, i, j):
         return self.edges
 
+    def sort_edges(self):
+        e = self.edges.sort(key=lambda i: i[3])
+        return e
+
     def populate_adj(self, prob, weight=False):
         for i in range(self.adj.size):
             for j in range(self.adj.size):
