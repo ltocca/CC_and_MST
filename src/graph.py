@@ -56,6 +56,11 @@ class Graph:
                     self.adj[i, j] = v
                     self.edges.append([i, j, v])
 
+    def clear_adj(self):
+        s = self.size()
+        self.adj = np.zeros(s)
+        self.edges.clear()
+
     def dfs(self):
         for u in self.v:
             u.set_colour(WHITE)
