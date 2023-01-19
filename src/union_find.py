@@ -6,6 +6,9 @@ class UnionFind:
         self.collection = []  # collezione s di insiemi
         #self.delegates = {}
 
+    def get_dim(self):
+        return len(self.collection)
+
     def make_set(self, x):
         s = LinkedList()
         s.add(x)
