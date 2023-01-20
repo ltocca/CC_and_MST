@@ -23,7 +23,7 @@ class Graph:
     def __init__(self, n_vertices, probability):
         self.v = []  # vettore contenente i vertici/nodi
         self.t = 0
-        for j in n_vertices:
+        for j in range(n_vertices):
             self.v.append(Vertex(j))
         self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
         self.edges = []  # inizializzazione vettore di archi
@@ -52,8 +52,8 @@ class Graph:
                     v = random.random() * 100
                 elif p > 1:
                     v = 1
-                if v is not 0:
-                    self.adj[i, j] = v
+                if v != 0:
+                    self.adj[i][j] = v
                     self.edges.append([i, j, v])
 
     def clear_adj(self):
