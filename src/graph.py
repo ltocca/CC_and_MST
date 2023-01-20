@@ -49,7 +49,7 @@ class Graph:
                 v = 0
                 p = (random.random() + (prob / 100))
                 if p > 1 and weight:
-                    v = random.random() * 100
+                    v = int(random.random() * 100)
                 elif p > 1:
                     v = 1
                 if v != 0:
