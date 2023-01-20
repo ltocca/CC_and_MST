@@ -25,7 +25,8 @@ class Graph:
         self.t = 0
         for j in range(n_vertices):
             self.v.append(Vertex(j))
-        self.adj = np.zeros(n_vertices)  # inizializzazione matrice di adiacenza
+        n = (n_vertices, n_vertices)
+        self.adj = np.zeros(n)  # inizializzazione matrice di adiacenza
         self.edges = []  # inizializzazione vettore di archi
 
     def size(self):
@@ -44,8 +45,8 @@ class Graph:
         return e
 
     def populate_adj(self, prob, weight=False):
-        for i in range(self.adj.size):
-            for j in range(self.adj.size):
+        for i in range(self.adj.shape[0]):
+            for j in range(self.adj.shape[1]):
                 v = 0
                 p = (random.random() + (prob / 100))
                 if p > 1 and weight:
