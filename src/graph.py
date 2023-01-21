@@ -46,7 +46,7 @@ class Graph:
 
     def populate_adj(self, prob, weight=False):
         for i in range(self.adj.shape[0]):
-            for j in range(self.adj.shape[1]):
+            for j in range(i, self.adj.shape[1]):
                 v = 0
                 p = (random.random() + (prob / 100))
                 if p > 1 and weight:
@@ -55,7 +55,8 @@ class Graph:
                     v = 1
                 if v != 0:
                     self.adj[i][j] = v
-                    self.edges.append([i, j, v])
+                    self.adj[j][i] = v
+                    self.edges.append([self.v[i], self.v[j], v])
 
     def clear_adj(self):
         s = self.size()
