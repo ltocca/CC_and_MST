@@ -41,7 +41,7 @@ class Graph:
         return self.edges
 
     def sort_edges(self):
-        e = self.edges.sort(key=lambda i: i[3])
+        e = self.edges.sort(key=lambda i: i[2])
         return e
 
     def populate_adj(self, prob, weight=False):
