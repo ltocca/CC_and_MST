@@ -30,7 +30,7 @@ class Graph:
         self.edges = []  # inizializzazione vettore di archi
 
     def size(self):
-        return self.adj.size
+        return self.adj.shape[0]  # matrice è quadrata -> indifferente ritornare numero righe o colonne
 
     def add_vertex(self, value):
         if value in self.v:
