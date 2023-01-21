@@ -34,18 +34,25 @@ def test():
     n = 5  # numero iniziale di nodi
     p = 10  # probabilità di archi iniziale
 
-    for i in range(1, 13):
+    for i in range(1, 3):
         g = Graph(n, p)
         g.populate_adj(p)
-        dfs_results.append(dfs_test(g))
+        # dfs_results.append(dfs_test(g))
         cc_results.append(cc_test(g))
-        mst_results.append(mst_test(g))
+        #mst_results.append(mst_test(g))
 
         g.clear_adj()
         g.populate_adj(p, True)
-        dfs_results_weighted.append(dfs_test(g))
+        # dfs_results_weighted.append(dfs_test(g))
         cc_results_weighted.append(cc_test(g))
         mst_results_weighted.append(mst_test(g))
         p += 5
-        n += int(n*i/4)
+        n += int(n * i / 4)
 
+
+def main():
+    test()
+
+
+if __name__ == "__main__":
+    main()
