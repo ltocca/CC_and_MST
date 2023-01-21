@@ -16,9 +16,9 @@ class UnionFind:
         #self.delegates[x] = s
 
     def find_set(self, x):
-        for i in self.collection:
-            c = self.collection[i]
-            if x in c:
+        for i in range(len(self.collection)):
+            c = self.collection[i].search(x)
+            if c is not None:
                 return c.r
         return None
 
@@ -29,7 +29,7 @@ class UnionFind:
         return None
 
     def union(self, x, y):
-        s = LinkedList()
+        #s = LinkedList()
         s_x = self.find_ll(x)
         s_y = self.find_ll(y)
         if s_x.size() < s_y.size():  # euristica unione pesata
