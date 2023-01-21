@@ -16,7 +16,11 @@ class UnionFind:
         #self.delegates[x] = s
 
     def find_set(self, x):
-        return x.r
+        for i in self.collection:
+            c = self.collection[i]
+            if x in c:
+                return c.r
+        return None
 
     def find_ll(self, x):
         for i in range(len(self.collection)):
