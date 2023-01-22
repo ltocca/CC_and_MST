@@ -49,6 +49,17 @@ def test():
         p += 5
         n += int(n * i / 4)
 
+    x = np.arange(1, len(dfs_results) + 1) * 1000
+    plot_1 = plt.figure(1)
+    plt.plot(x, dfs_results)
+    plt.plot(x, dfs_results_weighted)
+    plt.xlabel("Dimensione, probabilità")
+    plt.ylabel("Tempo in s")
+    plt.legend(["Non pesato", "Pesato"])
+    plt.title("Confronto esecuzione DFS tra grafo pesato e non pesato")
+
+    plot_1.savefig('img/dfs')
+
 
 def main():
     test()
