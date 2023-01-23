@@ -37,7 +37,7 @@ class Graph:
             return print("Vertex already present")
         self.v.append(Vertex(value))
 
-    def get_edges(self, i, j):
+    def get_edges(self):
         return self.edges
 
     def sort_edges(self):
@@ -76,10 +76,13 @@ class Graph:
         self.t += 1
         u.d = self.t
         u.set_colour(GREY)
-        for v in self.adj[u]:
-            if v.colour is WHITE:
-                v.p = u
-                self.dfs_visit(v)
+        adj_l = self.adj[u.value]
+        for i in range(len(adj_l)):
+            vertex = self.v[i]
+            if vertex != 0:
+                if vertex.colour is WHITE:
+                    vertex.p = u
+                    self.dfs_visit(vertex)
         u.set_colour(BLACK)
         self.t += 1
         u.f = self.t
