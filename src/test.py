@@ -1,7 +1,7 @@
 from timeit import default_timer as timer
 from cc import cc
 from mst_kruskal import *
-
+import matplotlib.pyplot as plt
 
 def dfs_test(g):
     start = timer()
@@ -34,16 +34,16 @@ def test():
     n = 5  # numero iniziale di nodi
     p = 10  # probabilità di archi iniziale
 
-    for i in range(1, 3):
+    for i in range(1, 3): # dovrebbe essere da 1 a 13
         g = Graph(n, p)
         g.populate_adj(p)
-        # dfs_results.append(dfs_test(g))
+        dfs_results.append(dfs_test(g))
         cc_results.append(cc_test(g))
-        #mst_results.append(mst_test(g))
+        mst_results.append(mst_test(g))
 
-        g.clear_adj()
+        g = Graph(n, p)
         g.populate_adj(p, True)
-        # dfs_results_weighted.append(dfs_test(g))
+        dfs_results_weighted.append(dfs_test(g))
         cc_results_weighted.append(cc_test(g))
         mst_results_weighted.append(mst_test(g))
         p += 5
@@ -58,7 +58,7 @@ def test():
     plt.legend(["Non pesato", "Pesato"])
     plt.title("Confronto esecuzione DFS tra grafo pesato e non pesato")
 
-    plot_1.savefig('img/dfs')
+    plot_1.savefig('img/dfs.png')
 
 
 def main():
