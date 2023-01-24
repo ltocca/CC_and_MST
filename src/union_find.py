@@ -4,7 +4,7 @@ from linked_list import *
 class UnionFind:
     def __init__(self):
         self.collection = []  # collezione s di insiemi
-        #self.delegates = {}
+        self.delegates = {}
 
     def get_dim(self):
         return len(self.collection)
@@ -13,14 +13,15 @@ class UnionFind:
         s = LinkedList()
         s.add(x)
         self.collection.append(s)
-        #self.delegates[x] = s
+        self.delegates[x] = x
 
-    def find_set(self, x):
-        for i in range(len(self.collection)):
-            c = self.collection[i].search(x)
-            if c is not None:
-                return c.r
-        return None
+    def find_set(self, x): # TODO: riscrivere/controllare dopo search in linked_list
+        # for i in range(len(self.collection)):
+        #     c = self.collection[i].search(x)
+        #     if c is not None:
+        #         return c.r
+        # return None
+        return self.delegates[x]
 
     def find_ll(self, x):
         for i in range(len(self.collection)):
