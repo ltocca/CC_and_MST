@@ -54,7 +54,7 @@ class LinkedList:
             temp.set_next(self.head)
             self.set_head(temp)
 
-    def search(self, v):
+    def search(self, v):  # TODO: riscrivere funzione search, non funziona
         if self.is_empty() is not True:
             n = self.head
             while n.get_next() is not None:
