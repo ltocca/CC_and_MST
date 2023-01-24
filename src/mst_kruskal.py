@@ -10,7 +10,7 @@ def mst_kruskal(G):  # in questo caso ometto matrice dei pesi, le unisco in G (n
     e = G.sort_edges()
     count = 0
     for i in e:
-        if uf.find_set(i[1]) is not uf.find_set(i[2]):
+        if uf.find_set(i[0]) is not uf.find_set(i[1]):
             A.append(i)
             uf.union(i[1], i[2])
             count += 1
