@@ -58,7 +58,7 @@ class LinkedList:
         if self.is_empty() is not True:
             n = self.head
             while n.get_next() is not None:
-                if n.get_data is v:
+                if n.get_data() is v:
                     print("Node found!")
                     return n
                 else:
