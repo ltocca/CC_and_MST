@@ -23,14 +23,17 @@ class UnionFind:
         # return None
         return self.delegates[x]
 
-    def find_ll(self, x):
-        for i in range(len(self.collection)):
-            if self.collection[i].search(x) is not None:
-                return self.collection[i]
-        return None
+    def find_ll(self, x):  # TODO: controllare condizione del while
+        delegate = self.find_set(x)
+        count = 0
+        current = self.collection[count]
+        while current.head.get_data() != delegate:
+            count += 1
+            current = self.collection[count]
+        return self.collection[count]
 
     def union(self, x, y):
-        #s = LinkedList()
+        # s = LinkedList()
         s_x = self.find_ll(x)
         s_y = self.find_ll(y)
         if s_x.size() < s_y.size():  # euristica unione pesata
