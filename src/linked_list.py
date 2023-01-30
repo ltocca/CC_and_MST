@@ -54,26 +54,29 @@ class LinkedList:
             temp.set_next(self.head)
             self.set_head(temp)
 
-    def search(self, v):  # TODO: riscrivere funzione search, non funziona
+    def search(self, v):  # NB: funzione search non più usata
         if self.is_empty() is not True:
             n = self.head
-            while n.get_next() is not None:
-                if n.get_data() is v:
+            found = False
+            while n.get_next() is not None and not found:
+                if n.get_data().v == v.v:
                     print("Node found!")
                     return n
                 else:
                     n = n.get_next()
-            print("Node not found!")
-            return None
+            # print("Node not found!")
+            # return None
 
     def merge(self, ll):
         h = self.get_head()
         c = ll.get_head()
         self.tail.set_next(c)
         self.set_tail(ll.get_tail())
-        while c.is_empty() is not True:
-            c.r = h
-            c = c.get_next()
+        while ll.is_empty() is not True:
+            if c is not None:
+                c.r = h
+                c = c.get_next()
+                break
 
     def size(self):
         current = self.head
