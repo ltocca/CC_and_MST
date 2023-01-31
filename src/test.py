@@ -32,8 +32,8 @@ def test():
     dfs_results_weighted = []
     cc_results_weighted = []
     mst_results_weighted = []
-    n = 25  # numero iniziale di nodi 5
-    p = 50  # probabilità di archi iniziale 10
+    n = 5  # numero iniziale di nodi 5
+    p = 10  # probabilità di archi iniziale 10
 
     for i in range(1, 3):  # dovrebbe essere 13
         g = Graph(n, p)
