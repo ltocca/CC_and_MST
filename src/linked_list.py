@@ -44,6 +44,9 @@ class LinkedList:
     def is_empty(self):
         return self.head is None
 
+    def get_d(self):  # ritorna il nodo rappresentante
+        return self.head.get_data()
+
     def add(self, item):  # inserimento in testa
         temp = Node(item)
         if self.is_empty():
