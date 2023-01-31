@@ -33,7 +33,8 @@ class UnionFind:
         current = self.collection[count]
         while current.get_d() != delegate:
             count += 1
-            current = self.collection[count]  # TODO: eccezione out of bounds
+            if count < len(self.collection):
+                current = self.collection[count]  # T#ODO: eccezione out of bounds
         return self.collection[count]
 
     def union(self, x, y):
