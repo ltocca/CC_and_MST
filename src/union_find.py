@@ -9,13 +9,17 @@ class UnionFind:
     def get_dim(self):
         return len(self.collection)
 
+    # def remove(self, c):
+    #     self.delegates.pop(c.head.get_data())
+    #     self.collection.remove(c)
+
     def make_set(self, x):
         s = LinkedList()
         s.add(x)
         self.collection.append(s)
         self.delegates[x] = x
 
-    def find_set(self, x): # TODO: riscrivere/controllare dopo search in linked_list
+    def find_set(self, x):
         # for i in range(len(self.collection)):
         #     c = self.collection[i].search(x)
         #     if c is not None:
@@ -23,25 +27,22 @@ class UnionFind:
         # return None
         return self.delegates[x]
 
-    def find_ll(self, x):  # TODO: controllare condizione del while
+    def find_ll(self, x):
         delegate = self.find_set(x)
         count = 0
         current = self.collection[count]
-        while current.head.get_data() != delegate:
+        while current.get_d() != delegate:
             count += 1
-            current = self.collection[count]
+            current = self.collection[count]  # TODO: eccezione out of bounds
         return self.collection[count]
 
     def union(self, x, y):
-        # s = LinkedList()
         s_x = self.find_ll(x)
         s_y = self.find_ll(y)
         if s_x.size() < s_y.size():  # euristica unione pesata
-            s = s_y.merge(s_x)
+            s_y.merge(s_x)
+            self.collection.remove(s_x)
+
         else:
-            s = s_x.merge(s_y)
-        self.collection.append(s)
-        self.collection.remove(s_x)
-        self.collection.remove(s_y)
-
-
+            s_x.merge(s_y)
+            self.collection.remove(s_y)
