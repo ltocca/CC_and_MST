@@ -17,7 +17,7 @@ class UnionFind:
         s = LinkedList()
         s.add(x)
         self.collection.append(s)
-        self.delegates[x] = x
+        self.delegates[x.value] = x
 
     def find_set(self, x):
         # for i in range(len(self.collection)):
@@ -25,7 +25,7 @@ class UnionFind:
         #     if c is not None:
         #         return c.r
         # return None
-        return self.delegates[x]
+        return self.delegates[x.value]
 
     def find_ll(self, x):
         delegate = self.find_set(x)
