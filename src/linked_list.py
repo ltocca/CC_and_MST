@@ -45,7 +45,7 @@ class LinkedList:
         return self.head is None
 
     def get_d(self):  # ritorna il nodo rappresentante
-        return self.head.get_data()
+        return self.head.get_r()
 
     def add(self, item):  # inserimento in testa
         temp = Node(item)
