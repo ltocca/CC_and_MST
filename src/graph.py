@@ -47,7 +47,7 @@ class Graph:
 
     def populate_adj(self, prob, weight=False):
         for i in range(self.adj.shape[0]):
-            for j in range(i, self.adj.shape[0]):
+            for j in range(i + 1, self.adj.shape[0]):
                 v = 0
                 p = (random.random() + (prob / 100))
                 if p > 1 and weight:
