@@ -4,28 +4,21 @@ from linked_list import *
 class UnionFind:
     def __init__(self):
         self.collection = []  # collezione s di insiemi
-        self.delegates = {}
 
     def get_dim(self):
         return len(self.collection)
-
-    # def remove(self, c):
-    #     self.delegates.pop(c.head.get_data())
-    #     self.collection.remove(c)
 
     def make_set(self, x):
         s = LinkedList()
         s.add(x)
         self.collection.append(s)
-        self.delegates[x] = x
 
     def find_set(self, x):
-        # for i in range(len(self.collection)):
-        #     c = self.collection[i].search(x)
-        #     if c is not None:
-        #         return c.r
-        # return None
-        return self.delegates[x]
+        for i in range(len(self.collection)):
+            c = self.collection[i].search(x)
+            if c is True:
+                return self.collection[i].get_d()
+        return None
 
     def find_ll(self, x):
         delegate = self.find_set(x)
@@ -33,8 +26,7 @@ class UnionFind:
         current = self.collection[count]
         while current.get_d() != delegate:
             count += 1
-            if count < len(self.collection):
-                current = self.collection[count]  # T#ODO: eccezione out of bounds
+            current = self.collection[count]
         return self.collection[count]
 
     def union(self, x, y):
