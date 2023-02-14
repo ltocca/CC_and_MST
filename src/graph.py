@@ -20,7 +20,8 @@ class Vertex:  # o la chiamo nodo?
 
 
 class Graph:
-    def __init__(self, n_vertices, probability):
+    def __init__(self, n_vertices, weight=False):
+        self.w = weight
         self.v = []  # vettore contenente i vertici/nodi
         self.t = 0
         for j in range(n_vertices):
@@ -45,12 +46,12 @@ class Graph:
         e.sort(key=lambda i: i[2])
         return e
 
-    def populate_adj(self, prob, weight=False):
+    def populate_adj(self, prob):
         for i in range(self.adj.shape[0]):
             for j in range(i + 1, self.adj.shape[0]):
                 v = 0
                 p = (random.random() + (prob / 100))
-                if p > 1 and weight:
+                if p > 1 and self.w:
                     v = int(random.random() * 100)
                 elif p > 1:
                     v = 1
@@ -87,4 +88,3 @@ class Graph:
         u.set_colour(BLACK)
         self.t += 1
         u.f = self.t
-
