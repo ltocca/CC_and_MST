@@ -50,7 +50,8 @@ Su questa struttura dati possiamo operare con tre funzioni:
 
 ## Componenti connesse
 
-Dato un grafo $G=(V,E)$, una componente connessa é un insieme massimale di vertici $C⊆V$ tale che per ogni coppia di nodi esiste un cammino che li collega. 
+Dato un grafo $G=(V,E)$, una componente connessa é un insieme massimale di vertici $C⊆V$ tale che per ogni coppia di nodi esiste un cammino che li collega.
+Le componenti connesse *partizionano* i vertici in classi di equivalenza secondo la relazione *"è raggiungibile da"*. Un grafo è connesso se ogni coppia di vertici è collegata attraverso un cammino.
 Sono utilizzate ad esempio per trovare "oggetti" all'interno di immagini, interpretando come nodi i singoli pixel dell'immagine stessa
 L'algoritmo utilizzato all'interno di questo esperimento si basa sull'utilizzo di union-find come struttura dati.
 
@@ -73,4 +74,8 @@ Per ottenere l'algoritmo di Kruskal, che sarà utilizzato per gli esperimenti, �
 
 > "Sia A un sottoinsieme di qualche MST, $(S,V-S)$ un taglio che rispetta $A$ e $(u,v)$ un arco leggero che attraversa $(S,V-S)$. Allora $(u,v)$ é sicuro per $A$."
 
-Anche in questo caso per l'implementazione pratica viene utilizzata la struttura dati *Union-find*
+Anche in questo caso per l'implementazione pratica viene utilizzata la struttura dati *Union-find.*
+
+# Implementazione pratica
+
+Il programma è suddiviso
