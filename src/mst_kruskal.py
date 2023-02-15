@@ -14,7 +14,5 @@ def mst_kruskal(G):  # in questo caso ometto matrice dei pesi, le unisco in G (n
             A.append(i)
             uf.union(i[0], i[1])
             count += 1
-            if count is G.size()-1:
-                break
     return A
 

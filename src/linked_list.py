@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, init_data):
+    def __init__(self, init_data, r):
         self.data = init_data
-        self.r = None  # rappresentante
+        self.r = r  # rappresentante
         self.next = None  # successore
 
     # getters e setters non sono pythonic (forse sostituire con proprietà)
@@ -35,7 +35,7 @@ class LinkedList:
     def get_head(self):
         return self.head
 
-    def set_tail (self, t):
+    def set_tail(self, t):
         self.tail = t
 
     def get_tail(self):
@@ -45,28 +45,27 @@ class LinkedList:
         return self.head is None
 
     def get_d(self):  # ritorna il nodo rappresentante
-        return self.head.get_data()
+        return self.head.get_r()
 
     def add(self, item):  # inserimento in testa
-        temp = Node(item)
         if self.is_empty():
-            self.set_head(temp)
-            self.set_tail(temp)
-            temp.set_r(self)
-        else:
+            temp = Node(item, item)
             temp.set_next(self.head)
+            self.set_tail(temp)
+            self.set_head(temp)
+        else:
+            temp = Node(item, self.get_head().get_d())
+            temp.set_next(self.get_head())
             self.set_head(temp)
 
     def search(self, v):  # NB: funzione search non più usata
         if self.is_empty() is not True:
             n = self.head
             found = False
-            while n.get_next() is not None and not found:
-                if n.get_data().v == v.v:
-                    print("Node found!")
-                    return n
-                else:
-                    n = n.get_next()
+            while n is not None and n.data is not v:
+                n = n.get_next()
+            if n is not None:
+                return True
             # print("Node not found!")
             # return None
 
@@ -92,5 +91,3 @@ class LinkedList:
     def clear(self):
         self.head = None
         self.tail = None
-
-
