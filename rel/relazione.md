@@ -57,14 +57,20 @@ L'algoritmo utilizzato all'interno di questo esperimento si basa sull'utilizzo d
 ## Albero ricoprente minimo (MST)
 
 Si tratti di un albero di connessione T (sottoinsieme dell'insieme di archi $E$ come un grafo non diretto $G=(V,E)$) in cui la somma dei pesi dei suoi archi:
-$w(T) = \sum_{(u,v) \in T} \ w(u, v)$
-sia minimo e connetta tutti i verici.
+
+> $w(T) = \sum_{(u,v) \in T} \ w(u, v)$ 
+
+sia minimo e connetta tutti i vertici.
 Un MST ha $|V|-1$ archi, non ha cicli e *può non essere unico*.
 
 Esiste un algoritmo generico che permette di costruire la soluzione e consiste in creare un insieme vuoto di archi $A$, per poi aggiungerne progressivamente conservando l'invariante di ciclo:
 
 > ”Se A é un sottoinsieme di qualche MST, l’arco $(u,v)$ é *sicuro* per A se e solo se $A∪(u,v)$ é sottoinsieme di un qualche MST.”
 
-Da questo è possibile ricavare che al fine di ottenere un albero ricoprente minimo sia necessario aggiungere solamente $|V|-1$ archi *sicuri*.
+Da questo è possibile ricavare che al fine di ottenere un albero ricoprente minimo sia necessario aggiungere solamente $N-1$ archi *sicuri*, con $N$ pari al numero di nodi.
 
-Per otternere 
+Per ottenere l'algoritmo di Kruskal, che sarà utilizzato per gli esperimenti, è necessario introdurre il seguente *teorema*:
+
+> "Sia A un sottoinsieme di qualche MST, $(S,V-S)$ un taglio che rispetta $A$ e $(u,v)$ un arco leggero che attraversa $(S,V-S)$. Allora $(u,v)$ é sicuro per $A$."
+
+Anche in questo caso per l'implementazione pratica viene utilizzata la struttura dati *Union-find*
