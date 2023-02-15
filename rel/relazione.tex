@@ -36,6 +36,7 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
+\usepackage{graphicx}
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -146,7 +147,7 @@ tre funzioni:
 \subsection{Componenti connesse}\label{componenti-connesse}}
 
 Dato un grafo \(G=(V,E)\), una componente connessa é un insieme
-massimale di vertici \(C\subset V\) tale che per ogni coppia di nodi esiste un
+massimale di vertici \(C \subset V\) tale che per ogni coppia di nodi esiste un
 cammino che li collega. Le componenti connesse \emph{partizionano} i
 vertici in classi di equivalenza secondo la relazione \emph{``è
 raggiungibile da''}. Un grafo è connesso se ogni coppia di vertici è
@@ -244,7 +245,13 @@ connesse.
 
 \hypertarget{componenti-connesse-1}{%
 \subsubsection{Componenti connesse}\label{componenti-connesse-1}}
+\includegraphics{../img/cc.png}
 
-\#\#\# Minimum spanning tree \#\#\# Confronto tra MST e CC
+\hypertarget{MST}{%
+	\subsubsection{MST}\label{MST}}
+\includegraphics{../img/mst.png}
+\hypertarget{componenti-connesse-1}{%
+	\subsubsection{Confronto tempi}\label{confronto tempi}}
+\includegraphics{../img/time.png}
 
 \end{document}

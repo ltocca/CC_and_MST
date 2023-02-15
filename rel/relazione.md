@@ -95,6 +95,7 @@ Si andranno a confrontare componenti connesse e MST singolarmente, determinando 
 # Risultati
 
 ### Componenti connesse
+
 <img src="../img/cc.png" title="Figura 1" alt="" data-align="inline">
 ### Minimum spanning tree
 <img src="../img/mst.png" title="Figura 2" alt="" data-align="inline">
