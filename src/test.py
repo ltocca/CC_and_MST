@@ -64,7 +64,7 @@ def test():
     plt.plot(x, cc_results)
     plt.plot(x, cc_results_weighted)
     plt.xlabel("Dimensione, probabilità")
-    plt.ylabel("Tempo in s")
+    plt.ylabel("Componenti connesse")
     plt.legend(["Non pesato", "Pesato"])
     plt.title("Confronto esecuzione CC tra grafo pesato e non pesato")
 
