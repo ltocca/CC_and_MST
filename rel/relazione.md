@@ -1,10 +1,8 @@
 ---
 author:
-
 - Leonardo Toccafondi   
-  date: February 15, 2022
-  title: Componenti connesse e Minimium Spanning Tree di un grafo
-
+date: February 15, 2022
+title: Componenti connesse e Minimium Spanning Tree di un grafo
 ---
 
 # Introduzione
@@ -78,4 +76,27 @@ Anche in questo caso per l'implementazione pratica viene utilizzata la struttura
 
 # Implementazione pratica
 
-Il programma è suddiviso
+Il programma è suddiviso in più file:
+
+- Graph.py si occupa della definizione dell'oggetto Node, che al suo interno contiene tutti gli attributi necessari, sia l'oggetto Graph, che corrisponde al nostro grafo.  Il grafo viene popolato assegnando casualmente (in base ad un valore di probabilità) archi ad ogni nodo, portando ad uno il valore corrispondente nella matrice aggiogata.  La matrice può anche essere equivalente alla matrice pesata, nel caso in cui la variabile booleana w sia posta a True al momento della creazione del grafo. Dopodiché viene inserito un vettore composto da [nodo u, nodo v, peso] (il peso nel caso di *default* è posto ad 1). All'interno di questo file è presente anche la funzione sort_edges, utilizzata nell'algoritmo di Kruskal per ordinare in base al peso  gli archi.
+
+- linked_list.py: in questo file vi è implementata la lista collegata utilizzata come base per la struttura dati union-find
+
+- union_find.py: in questo file sono stati implementati gli oggetti e le funzioni necessarie al fine di rappresentare insiemi disgiunti dinamici.
+
+- cc.py: implementazione dell'algoritmo delle componenti connesse come trovato sul Cormen
+
+- mst.py: algoritmo di kruskal, sempre basato sull'implementazione di Cormen
+
+# Esperimenti
+
+Si andranno a confrontare componenti connesse e MST singolarmente, determinando i loro valori all'aumentare simultaneo della probabilità e del numero di nodi. Inoltre viene misurato, sul grafo pesato il tempo necessario ad eseguire gli algoritmi di Kruskal e delle componenti connesse.
+
+# Risultati
+
+### Componenti connesse
+<img src="../img/cc.png" title="Figura 1" alt="" data-align="inline">
+### Minimum spanning tree
+<img src="../img/mst.png" title="Figura 2" alt="" data-align="inline">
+### Confronto tra MST e CC
+<img src="../img/time.png" title="Figura 3" alt="" data-align="inline">
