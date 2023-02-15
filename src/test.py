@@ -30,7 +30,7 @@ def test():
     n = 5  # numero iniziale di nodi 5
     p = 10  # probabilità di archi iniziale 10
 
-    for i in range(0, 10):  # dovrebbe essere 13
+    for i in range(1, 10):  # dovrebbe essere 13
         g = Graph(n)
         g.populate_adj(p)
         comp = cc_test(g)
@@ -54,31 +54,31 @@ def test():
 
     x = np.arange(1, len(mst_results_time) + 1)*10
     plot_1 = plt.figure(1)
-    plt.plot(x, cc_results)
     plt.plot(x, mst_results)
+    plt.plot(x, mst_results_weighted)
     plt.xlabel("Dimensione, probabilità")
-    plt.ylabel("Numero di Mst e CC")
-    plt.legend(["cc", "mst"])
-    plt.title("Confronto esecuzione CC e MST con grafo non pesato")
+    plt.ylabel("Numero")
+    plt.legend(["Non pesato", "pesato"])
+    plt.title("Confronto esecuzione MST tra grafo pesato e non pesato")
 
     plot_2 = plt.figure(2)
+    plt.plot(x, cc_results)
+    plt.plot(x, cc_results_weighted)
+    plt.xlabel("Dimensione, probabilità")
+    plt.ylabel("Componenti connesse")
+    plt.legend(["Non pesato", "Pesato"])
+    plt.title("Confronto esecuzione CC tra grafo pesato e non pesato")
+
+    plot_3 = plt.figure(3)
     plt.plot(x, cc_results_weighted)
     plt.plot(x, mst_results_weighted)
     plt.xlabel("Dimensione, probabilità")
-    plt.ylabel("Numero di MST e Componenti connesse")
-    plt.legend(["CC", "MST"])
-    plt.title("Confronto esecuzione CC e MST con grafo pesato")
-
-    plot_3 = plt.figure(3)
-    plt.plot(x, cc_results_time)
-    plt.plot(x, mst_results_weighted)
-    plt.xlabel("Dimensione, probabilità")
     plt.ylabel("Tempo in s")
-    plt.legend(["Componente connesse", "mst"])
-    plt.title("Confronto temporale esecuzione CC e MST")
+    plt.legend(["CC", "MST"])
+    plt.title("Confronto esecuzione MST e CC in grafo pesato")
 
     plot_1.savefig('img/cc_mst.png')
-    plot_2.savefig('img/cc_mst_w.png')
+    plot_2.savefig('img/cc.png')
     plot_3.savefig('img/time.png')
     plt.clf()
 
