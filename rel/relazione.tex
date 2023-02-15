@@ -1,0 +1,250 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Componenti connesse e Minimium Spanning Tree di un grafo},
+  pdfauthor={Leonardo Toccafondi},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Componenti connesse e Minimium Spanning Tree di un grafo}
+\author{Leonardo Toccafondi}
+\date{February 15, 2022}
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduzione}{%
+\section{Introduzione}\label{introduzione}}
+
+\hypertarget{grafi}{%
+\subsection{Grafi}\label{grafi}}
+
+Un grafo \(G\) è un insieme di elementi detti \textbf{vertici} (o nodi)
+che possono essere collegati fra di loro tramite linee chiamate
+\textbf{archi}. In particolare, si dice grafo la coppia ordinata di
+insiemi \(G = (V, E)\), dove \(V\) è l'insieme dei vertici di \(G\) e
+\(E\) è l'insieme degli archi di \(G\). Un grafo si dice
+\textbf{orientato} (o \textbf{diretto}) se \(E\) è un insieme di archi
+\emph{orientati}, cioè con una direzione (da sorgente a destinazione).
+Viceversa, un grafo si dice \textbf{non orientato} (o
+\textbf{indiretto}) se gli archi non sono orientati, dunque se la
+connessione tra due vertici ij ha lo stesso significato della
+connessione ji. Si definisce come grado di un vertice: numero di archi
+che incidono nel vertice. Inoltre, ad ogni arco di un grafo può essere
+assegnato un peso (che di solito corrisponde ad un numero reale, ma può
+essere anche ristretto agli interi).
+
+I grafi sono utilizzati come strutture dati al fine di rappresentare
+relazioni tra elementi generici, espresse nel modo più semplice tramite
+gli archi, che evidenziano le connessioni tra gli elementi.
+
+\hypertarget{rappresentazione}{%
+\paragraph{Rappresentazione}\label{rappresentazione}}
+
+Un grafo può essere rappresentato con due tipologie di strutture dati:
+
+\begin{itemize}
+\item
+  \textbf{Lista di adiacenza:} composta da un vettore \(Adj\) composto
+  da \(|V|\) liste, una per ogni nodo, dove \(Adj[u]\) contiene tutti i
+  vertici \(v\) t.c. \((u, v) \in E)\).
+
+  La lista di adiacenza richiede uno spazio di memoria
+  \(\Theta(V + E)\), e un tempo \(\Theta(u.degree)\) per determinare se
+  due vertici qualsiasi \((u, v) \in E\). In questo caso \(u.degree\)
+  rappresenta il \textbf{grado} del vertice (u).
+\item
+  \textbf{Matrice di adiacenza:} si introduce una matrice \(A\) di
+  dimensione \(|V|\times|V|\), dove ogni elemento \((i,j)\) ha valore 1
+  se \((i, j) \in E)\), cioè se il vertice (j) è adiacente a (i), e
+  valore 0 altrimenti. La matrice di adiacenza richiede uno spazio di
+  memoria \(\Theta(V^2)\), quindi peggiore rispetto alla lista, però
+  consente di determinare se due vertici qualsiasi \((u, v) \in E)\) in
+  un tempo \(\Theta(1)\), in quanto è sufficiente accedere all'elemento
+  \(A[u][v]\) e controllarne il valore. In generale, una matrice di
+  adiacenza è più indicata per descrivere grafi densi e con molti archi.
+\end{itemize}
+
+Per gli esperimenti svolti sono state utilizzate entrambe le strutture
+dati.
+
+Per estrapolare ulteriori informazioni, si utilizzano le cosiddette
+componenti connesse e l'albero ricoprente minimo (o Minimum Spanning
+Tree in inglese), quest'ultimo tramite alcuni algoritmi, tra cui quello
+di Kruskal. Tuttavia, è necessario prima introdurre una struttura dati
+per degli insiemi disgiunti, nota anche come \emph{Union-find}
+
+\hypertarget{union-find}{%
+\paragraph{Union find}\label{union-find}}
+
+Gestisce una collezione di insiemi dinamici, ciascuno identificato da un
+rappresentante, ovvero un elemento dell'insieme qualsiasi, a patto che
+rimanga sempre lo stesso. Su questa struttura dati possiamo operare con
+tre funzioni:
+
+\begin{itemize}
+\item
+  MakeSet(x): aggiunge alla collezione un nuovo insieme creato a partire
+  dall'elemento x;
+\item
+  FindSet(x): restituisce il rappresentante dell'insieme che contiene x;
+\item
+  Union(x,y): se
+  \(x \in S_x, y \in S_y, \ \Rightarrow S \leftarrow S_x -S_y \bigcup \{S_x \cup S_y)\)
+  Quindi aggiunge alla collezione un nuovo insieme contenente gli
+  elementi degli insiemi di x e y, e poi elimina gli insiemi d'origine.
+  Il rappresentante diventa uno degli elementi di \(S_x\) o di \(S_y\)
+\end{itemize}
+
+\hypertarget{componenti-connesse}{%
+\subsection{Componenti connesse}\label{componenti-connesse}}
+
+Dato un grafo \(G=(V,E)\), una componente connessa é un insieme
+massimale di vertici \(C\subset V\) tale che per ogni coppia di nodi esiste un
+cammino che li collega. Le componenti connesse \emph{partizionano} i
+vertici in classi di equivalenza secondo la relazione \emph{``è
+raggiungibile da''}. Un grafo è connesso se ogni coppia di vertici è
+collegata attraverso un cammino. Sono utilizzate ad esempio per trovare
+``oggetti'' all'interno di immagini, interpretando come nodi i singoli
+pixel dell'immagine stessa L'algoritmo utilizzato all'interno di questo
+esperimento si basa sull'utilizzo di union-find come struttura dati.
+
+\hypertarget{albero-ricoprente-minimo-mst}{%
+\subsection{Albero ricoprente minimo
+(MST)}\label{albero-ricoprente-minimo-mst}}
+
+Si tratti di un albero di connessione T (sottoinsieme dell'insieme di
+archi \(E\) come un grafo non diretto \(G=(V,E)\)) in cui la somma dei
+pesi dei suoi archi:
+
+\begin{quote}
+\(w(T) = \sum_{(u,v) \in T} \ w(u, v)\)
+\end{quote}
+
+sia minimo e connetta tutti i vertici. Un MST ha \(|V|-1\) archi, non ha
+cicli e \emph{può non essere unico}.
+
+Esiste un algoritmo generico che permette di costruire la soluzione e
+consiste in creare un insieme vuoto di archi \(A\), per poi aggiungerne
+progressivamente conservando l'invariante di ciclo:
+
+\begin{quote}
+''Se A é un sottoinsieme di qualche MST, l'arco \((u,v)\) é
+\emph{sicuro} per A se e solo se \(A \cup (u,v)\) é sottoinsieme di un
+qualche MST.''
+\end{quote}
+
+Da questo è possibile ricavare che al fine di ottenere un albero
+ricoprente minimo sia necessario aggiungere solamente \(N-1\) archi
+\emph{sicuri}, con \(N\) pari al numero di nodi.
+
+Per ottenere l'algoritmo di Kruskal, che sarà utilizzato per gli
+esperimenti, è necessario introdurre il seguente \emph{teorema}:
+
+\begin{quote}
+``Sia A un sottoinsieme di qualche MST, \((S,V-S)\) un taglio che
+rispetta \(A\) e \((u,v)\) un arco leggero che attraversa \((S,V-S)\).
+Allora \((u,v)\) é sicuro per \(A\).''
+\end{quote}
+
+Anche in questo caso per l'implementazione pratica viene utilizzata la
+struttura dati \emph{Union-find.}
+
+\hypertarget{implementazione-pratica}{%
+\section{Implementazione pratica}\label{implementazione-pratica}}
+
+Il programma è suddiviso in più file:
+
+\begin{itemize}
+\item
+  Graph.py si occupa della definizione dell'oggetto Node, che al suo
+  interno contiene tutti gli attributi necessari, sia l'oggetto Graph,
+  che corrisponde al nostro grafo. Il grafo viene popolato assegnando
+  casualmente (in base ad un valore di probabilità) archi ad ogni nodo,
+  portando ad uno il valore corrispondente nella matrice aggiogata. La
+  matrice può anche essere equivalente alla matrice pesata, nel caso in
+  cui la variabile booleana w sia posta a True al momento della
+  creazione del grafo. Dopodiché viene inserito un vettore composto da
+  {[}nodo u, nodo v, peso{]} (il peso nel caso di \emph{default} è posto
+  ad 1). All'interno di questo file è presente anche la funzione
+  sort\_edges, utilizzata nell'algoritmo di Kruskal per ordinare in base
+  al peso gli archi.
+\item
+  linked\_list.py: in questo file vi è implementata la lista collegata
+  utilizzata come base per la struttura dati union-find
+\item
+  union\_find.py: in questo file sono stati implementati gli oggetti e
+  le funzioni necessarie al fine di rappresentare insiemi disgiunti
+  dinamici.
+\item
+  cc.py: implementazione dell'algoritmo delle componenti connesse come
+  trovato sul Cormen
+\item
+  mst.py: algoritmo di kruskal, sempre basato sull'implementazione di
+  Cormen
+\end{itemize}
+
+\hypertarget{esperimenti}{%
+\section{Esperimenti}\label{esperimenti}}
+
+Si andranno a confrontare componenti connesse e MST singolarmente,
+determinando i loro valori all'aumentare simultaneo della probabilità e
+del numero di nodi. Inoltre viene misurato, sul grafo pesato il tempo
+necessario ad eseguire gli algoritmi di Kruskal e delle componenti
+connesse.
+
+\hypertarget{risultati}{%
+\section{Risultati}\label{risultati}}
+
+\hypertarget{componenti-connesse-1}{%
+\subsubsection{Componenti connesse}\label{componenti-connesse-1}}
+
+\#\#\# Minimum spanning tree \#\#\# Confronto tra MST e CC
+
+\end{document}
