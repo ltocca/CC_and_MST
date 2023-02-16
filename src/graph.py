@@ -1,42 +1,17 @@
 import random
-
 import numpy as np
-
-BLACK = 'BLACK'
-GREY = 'GREY'
-WHITE = 'WHITE'
-
-
-class Vertex:  # o la chiamo nodo?
-    def __init__(self, v):
-        self.value = v
-        self.colour = WHITE  # al momento della creazione il vertice non è ancora stato scoperto -> bianco
-        self.d = None  # tempo di scoperta del vertice
-        self.f = None  # tempo completamento visita del vertice
-        self.p = None  # predecessore
-
-    def set_colour(self, colour):
-        self.colour = colour
 
 
 class Graph:
     def __init__(self, n_vertices, weight=False):
         self.w = weight
-        self.v = []  # vettore contenente i vertici/nodi
-        self.t = 0
-        for j in range(n_vertices):
-            self.v.append(Vertex(j))
+        self.v = np.arange(n_vertices)  # vettore contenente i vertici/nodi
         n = (n_vertices, n_vertices)
         self.adj = np.zeros(n)  # inizializzazione matrice di adiacenza
         self.edges = []  # inizializzazione vettore di archi
 
     def size(self):
-        return self.adj.shape[0]  # matrice è quadrata -> indifferente ritornare numero righe o colonne
-
-    def add_vertex(self, value):
-        if value in self.v:
-            return print("Vertex already present")
-        self.v.append(Vertex(value))
+        return self.v.size
 
     def get_edges(self):
         return self.edges
@@ -64,28 +39,3 @@ class Graph:
         s = self.size()
         self.adj = np.zeros(s)
         self.edges.clear()
-
-    def dfs(self):
-        for u in self.v:
-            u.set_colour(WHITE)
-            u.p = None
-        self.t = 0
-        for u in self.v:
-            if u.colour is WHITE:
-                self.dfs_visit(u)
-
-    def dfs_visit(self, u):
-        self.t += 1
-        u.d = self.t
-        u.set_colour(GREY)
-        adj_l = self.adj[u.value]
-        for i in range(len(adj_l)):
-            vertex = self.v[i]
-            if vertex != 0:
-                if vertex.colour is WHITE:
-                    vertex.p = u
-                    self.dfs_visit(vertex)
-        u.set_colour(BLACK)
-        self.t += 1
-        u.f = self.t
-
