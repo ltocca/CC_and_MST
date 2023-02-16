@@ -1,11 +1,17 @@
 ---
 author:
 - Leonardo Toccafondi   
-date: February 15, 2022
+date: February, 2022
 title: Componenti connesse e Minimium Spanning Tree di un grafo
 ---
 
 # Introduzione
+
+Il grafo è una struttura che ha numerose applicazioni sia nei campi dell’informatica sia in quelli dell’ottimizzazione.  
+Alcuni tipi di operazioni possibili su di essi sono le visite e la ricerca di cammini, o insiemi di cammini, particolari.  
+Gli esperimenti che saranno eseguiti serviranno a esaminare due tipi particolari di ricerche in un grafo: la ricerca delle componenti connesse e la ricerca dell’MST(minimum spanning tree), quest’ultima sarà effettuata attraverso l’uso dell’algoritmo di Kruskal.  
+Ciò che ci interesserà scoprire maggiormente è il comportamento degli algoritmi per queste ricerche all’aumentare dei nodi del grafo.  
+É necessario infatti che essi siano efficienti su grafi relativamente estesi date le applicazioni reali, un esempio per le componenti connesse è nell’analisi di immagini e quindi OCR, mentre la ricerca di un albero di connessione minimo è un classico problema che si presenta nelle telecomunicazioni.
 
 ## Grafi
 
@@ -26,7 +32,7 @@ Un grafo può essere rappresentato con due tipologie di strutture dati:
   In questo caso $u.degree$ rappresenta il **grado** del vertice (u).
 
 - **Matrice di adiacenza:** si introduce una matrice $A$ di dimensione $|V|\times|V|$, dove ogni elemento $(i,j)$ ha valore 1 se $(i, j) \in E)$, cioè se il vertice (j) è adiacente a (i), e valore 0 altrimenti. 
-  La matrice di adiacenza richiede uno spazio di memoria $\Theta(V^2)$, quindi peggiore rispetto alla lista, però consente di determinare se due vertici qualsiasi $(u, v) \in E)$ in un tempo $\Theta(1)$, in quanto è sufficiente accedere all’elemento $A[u][v]$ e controllarne il valore.
+  La matrice di adiacenza richiede uno spazio di memoria $\Theta(V^2)$, quindi peggiore rispetto alla lista, però consente di determinare se due vertici qualsiasi $(u, v) \in E)$ in un tempo $\Theta(1)$, in quanto è sufficiente accedere all'elemento $A[u][v]$ e controllarne il valore.
   In generale, una matrice di adiacenza è più indicata per descrivere grafi densi e con molti archi.
 
 Per gli esperimenti svolti sono state utilizzate entrambe le strutture dati.
