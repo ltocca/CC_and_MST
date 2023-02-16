@@ -15,23 +15,13 @@ class UnionFind:
 
     def find_set(self, x):
         for i in range(len(self.collection)):
-            c = self.collection[i].search(x)
-            if c is True:
-                return self.collection[i].get_d()
+            if self.collection[i].search(x):
+                return self.collection[i]
         return None
 
-    def find_ll(self, x):
-        delegate = self.find_set(x)
-        count = 0
-        current = self.collection[count]
-        while current.get_d() != delegate:
-            count += 1
-            current = self.collection[count]
-        return self.collection[count]
-
     def union(self, x, y):
-        s_x = self.find_ll(x)
-        s_y = self.find_ll(y)
+        s_x = self.find_set(x)
+        s_y = self.find_set(y)
         if s_x.size() < s_y.size():  # euristica unione pesata
             s_y.merge(s_x)
             self.collection.remove(s_x)
