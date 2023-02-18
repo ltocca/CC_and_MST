@@ -1,7 +1,7 @@
 ---
 author:
 - Leonardo Toccafondi   
-date: February, 2022
+date: February, 2023 
 title: Componenti connesse e Minimium Spanning Tree di un grafo
 ---
 
