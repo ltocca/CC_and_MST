@@ -131,9 +131,23 @@ L'esperimento è stato svolto su un computer con le seguenti caratteristiche:
 
 ### Componenti connesse
 
-<img src="../img/cc.png" title="Figura 1" alt="" data-align="inline">
+<img src="../img/cc/cc_number_p=20.png" title="Figura 1" alt="" data-align="inline">
+<img src="../img/cc/cc_number_p=40.png" title="Figura 2" alt="" data-align="inline">
+<img src="../img/cc/cc_number_p=100.png" title="Figura 3" alt="" data-align="inline">
+<img src="../img/cc/cc_time_p=20.png" title="Figura 4" alt="" data-align="inline">
+<img src="../img/cc/cc_time_p=60.png" title="Figura 5" alt="" data-align="inline">
+<img src="../img/cc/cc_time_p=100.png" title="Figura 6" alt="" data-align="inline">
+
 ### Minimum spanning tree
 
-<img src="../img/mst.png" title="Figura 2" alt="" data-align="inline">
-### Confronto tra MST e CC
-<img src="../img/time.png" title="Figura 3" alt="" data-align="inline">s
+<img src="../img/mst/mst_time_p=20.png" title="Figura 7" alt="" data-align="inline">
+<img src="../img/mst/mst_time_p=60.png" title="Figura 8" alt="" data-align="inline">
+<img src="../img/mst/mst_time_p=100.png" title="Figura 9" alt="" data-align="inline">
+
+# Conclusioni
+
+Esaminando i grafici (inserire tabelle) emerge che molto spesso nel grafo generato si ha una sola componente connessa, soprattutto dal 40% di probabilità in poi.  
+Questo è particolarmente vero quando il numero di vertici del grafo è superiore a 10-20, infatti anche se la probabilità di avere un collegamento tra due nodi è abbastanza bassa in qualche modo sarà generato un cammino che collega qualsiasi coppia di nodi, più o meno lungo.  
+I tempi di esecuzione di questo algoritmo sono quelli attesi(comenelle figure 4, 5 e 6) ovvero più che lineare rispetto al numero di archi, cioè alla dimensione e alla probabilità di collegamento dei nodi.  
+
+Un comportamento molto simile lo ha anche il tempo di ricerca dell’MST(figure 7, 8 e 9), anche se le sue costanti sono più alte.  
