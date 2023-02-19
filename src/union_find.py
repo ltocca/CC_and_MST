@@ -22,7 +22,7 @@ class UnionFind:
     def union(self, x, y):
         s_x = self.find_set(x)
         s_y = self.find_set(y)
-        if s_x.size() < s_y.size():  # euristica unione pesata
+        if s_x.size < s_y.size:  # euristica unione pesata
             s_y.merge(s_x)
             self.collection.remove(s_x)
 
