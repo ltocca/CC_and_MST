@@ -23,7 +23,7 @@ def mst_test(g):
 
 
 def test():
-    sizes = [2 ** i for i in range(0, 13)]  # array numero nodi nel grafo
+    sizes = [2 ** i for i in range(0, 12)]  # array numero nodi nel grafo
     probs = [20, 40, 60, 80, 100]  # array di probabilità in %
     cc_data = {p: [] for p in probs}
     mst_data = {p: [] for p in probs}
@@ -66,7 +66,7 @@ def test():
         plt.plot([rec[0] for rec in cc_data[p]], [rec[1] for rec in cc_data[p]])
         plt.xlabel("Size")
         plt.ylabel("Time(s)")
-        plt.savefig("../img/cc/cc_time_p=" + str(p).replace(".", "") + ".png")
+        plt.savefig("img/cc/cc_time_p=" + str(p).replace(".", "") + ".png")
 
         # Size-Number of ccs
         plt.clf()
@@ -74,7 +74,7 @@ def test():
         plt.plot([rec[0] for rec in cc_data[p]], [rec[2] for rec in cc_data[p]])
         plt.xlabel("Size")
         plt.ylabel("Componenti connesse")
-        plt.savefig("../img/cc/cc_number_p=" + str(p).replace(".", "") + ".png")
+        plt.savefig("img/cc/cc_number_p=" + str(p).replace(".", "") + ".png")
 
         # Size-time Kruskal
         plt.clf()
@@ -83,7 +83,7 @@ def test():
                  [rec[1] for rec in mst_data[p] if rec[1] is not None])
         plt.xlabel("Size")
         plt.ylabel("Time(s)")
-        plt.savefig("../img/mst/mst_time_p=" + str(p).replace(".", "") + ".png")
+        plt.savefig("img/mst/mst_time_p=" + str(p).replace(".", "") + ".png")
 
 
 
