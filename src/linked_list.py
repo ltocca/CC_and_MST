@@ -28,6 +28,7 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.size = 0
 
     def set_head(self, h):
         self.head = h
@@ -57,6 +58,7 @@ class LinkedList:
             temp = Node(item, self.get_head().get_d())
             temp.set_next(self.get_head())
             self.set_head(temp)
+        self.size +=1
 
     def search(self, v):
         current = self.head
@@ -76,14 +78,6 @@ class LinkedList:
         while c is not None:
             c.r = h.r
             c = c.get_next()
-
-    def size(self):
-        current = self.head
-        count = 0
-        while current is not None:
-            count = count + 1
-            current = current.get_next()
-        return count
 
     def clear(self):
         self.head = None
