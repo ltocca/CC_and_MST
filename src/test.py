@@ -29,7 +29,7 @@ def test():
     mst_data = {p: [] for p in probs}
     for s in sizes:
         for p in probs:
-            file_name = "size=" + str(s) + "_p=" + str(p).replace(".", "") + ".dat"
+            file_name = "size=" + str(s) + "_p=" + str(p).replace(".", "") + ".txt"
             g = Graph(s, True)
             g.populate_adj(p)
 
@@ -52,39 +52,33 @@ def test():
                 with open("data/out_mst_" + file_name, "wb") as f:
                     pickle.dump(mst[0], f)
 
-    with open("data/cc_overall.dat", "wb") as f:
+    with open("data/cc_overall.txt", "wb") as f:
         pickle.dump(cc_data, f)
-    with open("data/mst_overall.dat", "wb") as f:
+    with open("data/mst_overall.txt", "wb") as f:
         pickle.dump(mst_data, f)
-
-    # parte di plot
 
     for p in probs:
         plt.clf()
 
-        # Size-time ccs
         plt.plot([rec[0] for rec in cc_data[p]], [rec[1] for rec in cc_data[p]])
-        plt.xlabel("Size")
-        plt.ylabel("Time(s)")
+        plt.xlabel("Dimensione")
+        plt.ylabel("Tempo(s)")
         plt.savefig("img/cc/cc_time_p=" + str(p).replace(".", "") + ".png")
 
-        # Size-Number of ccs
         plt.clf()
 
         plt.plot([rec[0] for rec in cc_data[p]], [rec[2] for rec in cc_data[p]])
-        plt.xlabel("Size")
+        plt.xlabel("Dimensione")
         plt.ylabel("Componenti connesse")
         plt.savefig("img/cc/cc_number_p=" + str(p).replace(".", "") + ".png")
 
-        # Size-time Kruskal
         plt.clf()
 
         plt.plot([rec[0] for rec in mst_data[p] if rec[1] is not None],
                  [rec[1] for rec in mst_data[p] if rec[1] is not None])
-        plt.xlabel("Size")
-        plt.ylabel("Time(s)")
+        plt.xlabel("Dimensione")
+        plt.ylabel("Tempo(s)")
         plt.savefig("img/mst/mst_time_p=" + str(p).replace(".", "") + ".png")
-
 
 
 def main():
