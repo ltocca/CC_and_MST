@@ -1,11 +1,10 @@
-from timeit import default_timer as timer
-import matplotlib.pyplot as plt
-import numpy as np
-import pickle
-import sys
 from src.graph import Graph
 from cc import cc
 from mst_kruskal import *
+
+from timeit import default_timer as timer
+import matplotlib.pyplot as plt
+import pickle
 
 
 def cc_test(g):
